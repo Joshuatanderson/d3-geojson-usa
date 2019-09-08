@@ -66,7 +66,7 @@ const App: React.FC = () => {
       .data(geoData.features)
       .enter().append("path")
       .attr("d", path)
-      .style('fill', '#c26593')
+      .style('fill', '#de8cce')
       .style('stroke', '#ffffff')
   }
 
@@ -75,7 +75,8 @@ const App: React.FC = () => {
   return (
     <div className="App">
         <h1>Colombia</h1>
-      <div id="svg-cont"></div>
+        <h3>Made with D3, TS, React, and &lt;3 </h3>
+      <div id="svg-cont"></div> 
     </div>
   );
 }
