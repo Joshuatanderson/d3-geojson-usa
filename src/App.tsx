@@ -17,14 +17,14 @@ const App: React.FC = () => {
   }, [])
 
   useEffect(() => {
-    // geoData && drawMap(path)
+    geoData && drawMap(path)
   }, [geoData])
 
 
   const STATS_PATH: string =
     'https://gist.githubusercontent.com/Fil/fa99e877a5698f5fdf0eb0246c86348b/raw/d3761d7e58f9c7f7d2b3c4679ddd65c86c6c3fdb/unemployment201907.csv';
   const GEO_PATH: string =
-    '../assets/usGeo.json';
+    'https://raw.githubusercontent.com/Joshuatanderson/geo-json4/master/assets/usGeo.json';
 
   const WIDTH: number = 1500;
   const HEIGHT: number = 1000;
@@ -43,14 +43,12 @@ const App: React.FC = () => {
   }
 
   const loadJsonData = async (path: string) => {
-    const data = await fetch(path);
-    console.log(data)
-    return data
+    return await d3.json(path)
   }
 
   // create projection
 
-  const projection = d3.geoAzimuthalEqualArea()
+  const projection = d3.geoAlbersUsa()
   // .scale()
   .translate([WIDTH / 2, HEIGHT / 2])
 
@@ -59,13 +57,13 @@ const App: React.FC = () => {
 
   const drawMap = (path: any) => {
     // draw map
-
     d3.select('svg')
-      .append("path")
-      .datum({ type: "FeatureCollection", features: geoData.features })
+      .selectAll("path")
+      .data(geoData.features)
+      .enter().append("path")
       .attr("d", path)
-      .attr('fill', '#f880f9')
-      .attr('stroke', '#fff')
+      .style('fill',' #f9f')
+      .style('stroke-color', '#ffee6f')
   }
 
 
