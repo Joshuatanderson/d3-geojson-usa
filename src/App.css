@@ -2,13 +2,6 @@
 	margin: 0;
 	padding: 0;
 }
-/* .App {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-content: center;
-	flex-grow: 0;
-} */
 
 .App{
 	display: flex;
@@ -17,6 +10,14 @@
 	align-content: center;
 	flex-grow: 0;
 	text-align: center;
-	margin-top: 20px;
+	margin-top: 40px;
     font-family: 'Roboto', sans-serif;
+}
+
+.state{
+	fill: rgb(190, 190, 190); 
+}
+
+.state:hover {
+	fill: rgb(112, 156, 194)
 }
