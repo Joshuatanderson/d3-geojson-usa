@@ -6,6 +6,7 @@
     "@types/d3": "^5.7.2",
     "@types/d3-geo": "^1.11.1",
     "@types/d3-queue": "^3.0.8",
+    "@types/geojson": "^7946.0.7",
     "@types/jest": "24.0.18",
     "@types/node": "12.7.4",
     "@types/react": "16.9.2",

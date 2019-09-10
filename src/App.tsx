@@ -23,7 +23,7 @@ const App: React.FC = () => {
 
 
   const STATS_PATH: string =
-    'https://gist.githubusercontent.com/Fil/fa99e877a5698f5fdf0eb0246c86348b/raw/d3761d7e58f9c7f7d2b3c4679ddd65c86c6c3fdb/unemployment201907.csv';
+    'https://raw.githubusercontent.com/Joshuatanderson/d3-geojson-usa/master/assets/unemploymentData.csv';
   const GEO_PATH: string = 'https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json';
 
   const WIDTH: number = 1000;
@@ -51,12 +51,15 @@ const App: React.FC = () => {
   const projection = d3.geoAlbersUsa()
     .translate([WIDTH / 2, HEIGHT / 2])
     .scale(1300)
-    // this isn't the center of the SVG, but of the map's coordinates
-    //https://bl.ocks.org/john-guerra/43c7656821069d00dcbc 
-    // .center([39, 98])
+  // this isn't the center of the SVG, but of the map's coordinates
+  //https://bl.ocks.org/john-guerra/43c7656821069d00dcbc 
+  // .center([39, 98])
 
   const path = d3.geoPath(projection)
 
+  const colorScale = d3.scaleThreshold()
+  .domain([100000, 1000000, 10000000, 30000000, 100000000, 500000000])
+  .range(d3.schemeBlues['9']);
 
   const drawMap = (path: any) => {
     // draw map
@@ -67,15 +70,19 @@ const App: React.FC = () => {
       .attr("d", path)
       .attr('stroke', '#ffffff')
       .attr("class", "state")
+      .attr("fill", (d: any) => {
+        console.log(statsData)
+        return colorScale(d.total);
+      })
   }
 
 
   // color map
   return (
     <div className="App">
-        <h1>'Merica</h1>
-        <h3>Made with D3, TS, React, and &lt;3 </h3>
-      <div id="svg-cont"></div> 
+      <h1>'Merica</h1>
+      <h3>Made with D3, TS, React, and &lt;3 </h3>
+      <div id="svg-cont"></div>
     </div>
   );
 }
